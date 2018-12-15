@@ -175,7 +175,7 @@
         <option value="$PROJECT_DIR$/games_page4.html" />
         <option value="$PROJECT_DIR$/mero_page3.html" />
         <option value="$PROJECT_DIR$/autho_page1.html" />
-        <option value="$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/criterion.html" />
+        <option value="$PROJECT_DIR$/../portfolio/portfolio/frontend/build/criterion.html" />
         <option value="$PROJECT_DIR$/css/menu.css" />
         <option value="$PROJECT_DIR$/menu_page2.html" />
         <option value="$PROJECT_DIR$/link.js" />
@@ -232,7 +232,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -380,28 +380,28 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/css/autho_style.css" />
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/public/style/profile_admin_style.css">
+    <entry file="file://$PROJECT_DIR$/../portfolio/portfolio/frontend/build/public/style/profile_admin_style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="53" column="16" lean-forward="true" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/criterion.html">
+    <entry file="file://$PROJECT_DIR$/../portfolio/portfolio/frontend/build/criterion.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="369">
           <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/public/style/criterion.css">
+    <entry file="file://$PROJECT_DIR$/../portfolio/portfolio/frontend/build/public/style/criterion.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="505">
           <caret line="61" column="2" selection-end-line="61" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/profile_admin.html">
+    <entry file="file://$PROJECT_DIR$/../portfolio/portfolio/frontend/build/profile_admin.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="34" column="18" selection-start-line="23" selection-start-column="8" selection-end-line="34" selection-end-column="18" />
@@ -410,39 +410,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/menu.css" />
     <entry file="file://$PROJECT_DIR$/css/img/mero.css" />
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/processed.html">
+    <entry file="file://$PROJECT_DIR$/../portfolio/portfolio/frontend/build/processed.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="355">
           <caret line="139" selection-start-line="139" selection-end-line="141" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/public/js/add.js">
+    <entry file="file://$PROJECT_DIR$/../portfolio/portfolio/frontend/build/public/js/add.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="901">
           <caret line="53" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/add.html">
+    <entry file="file://$PROJECT_DIR$/../portfolio/portfolio/frontend/build/add.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="41" column="25" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/public/js/processed.js">
+    <entry file="file://$PROJECT_DIR$/../portfolio/portfolio/frontend/build/public/js/processed.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/js/app.js" />
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/app.js">
+    <entry file="file://$PROJECT_DIR$/../portfolio/portfolio/frontend/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="505">
           <caret line="32" lean-forward="true" selection-end-line="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/user_main.html">
+    <entry file="file://$PROJECT_DIR$/../portfolio/portfolio/frontend/build/user_main.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/style/games.css">
