@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
+.body{
+    font-family: Amatic SC;
+    font-size: 25px;
+    background-color: #ebf8f9;
+}
+
+.main{
+    height: 600px;
+    margin: 5%;
+}
+
+.page_top {
+    height: 50px;
+    background-color: #59c8cd;
+    border-bottom: 1px solid #a5a5a5;
+}
+.title{
+    position: absolute;
+    left: 7%;
+    font-size: 35px;
+    color: white;
+}
+.right_part{
+    font-size: 25px;
+    margin-top: 5px;
+    position: absolute;
+    right: 7%;
+}
+.cornerbtn{
+    margin-left: 15px;
+}
+option{
+    font-size: 25px;
+}
+
+.push{
+    margin-top: 15px;
+}
+
+h1{
+    text-align: center;
+}

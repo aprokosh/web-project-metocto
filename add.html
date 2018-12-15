@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+    <title>Новое мероприятие</title>
+    <link rel="icon" href="style/img/icon.png">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/add.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+<div class="container-fluid body">
+    <div class="row page_top">
+        <span class="title">Осьметодичка. Добавь своё мероприятие!</span>
+        <span class="right_part">
+            <span id="username"></span><input type="button" class="btn btn-info cornerbtn" value="На главную"></span>
+        </span>
+    </div>
+    <div class="row main">
+        <div class="col-1"></div>
+        <div class="col-9 choose">
+            <form action="/add" method="post">
+                <input type="text" class="form-control area_text" placeholder="Введите название" name = "name" required>
+                <div>
+                    <label  for="category" class="label_direction">Категория</label>
+                    <br />
+                    <select name="type" id="category" class="form-control" required>
+
+                    </select>
+                </div>
+                <div>
+                    <label  for="age" class="label_direction">Возраст</label>
+                    <br />
+                    <select name="age" id="age" class="form-control " required>
+
+                    </select>
+                </div>
+                <div>
+                    <label  for="hardness" class="label_direction">Сложность</label>
+                    <br />
+                    <select name="hard" id="hardness" class="form-control " required>
+
+                    </select>
+                </div>
+                <div>
+                    <label  for="place" class="label_direction">Место проведения</label>
+                    <br />
+                    <select name="place" id="place" class="form-control " required>
+
+                    </select>
+                </div>
+                <br><input type="text" class="form-control area_text" placeholder="Введите описание" name = "desc" required>
+                <br><input type="text" class="form-control area_text" placeholder="Введите ссылку" name = "link" required>
+                <input class="button btn btn-info push" type="submit" value="Добавить">
+            </form>
+        </div>
+    </div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+<script>
+    function getUsername(){
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/getusername', true);
+
+        xhr.onload = function () {
+            let data = xhr.responseText;
+            document.getElementById("username").innerHTML = data;
+        }
+        xhr.send()
+    }
+    $( ".push").click(function() {
+        alert("Мероприятие будет рассмотрено модератором");
+    });
+    $( ".cornerbtn").click(function() {
+        window.location.href = `/menu`;
+    });
+    getUsername();
+</script>
+<script src="js/search.js"></script>
+</body>
+</html>

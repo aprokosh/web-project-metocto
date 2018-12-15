@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <title>Menu</title>
+    <link rel="icon" href="style/img/icon.png">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/res.css">
+</head>
+<body>
+<div class="container-fluid body">
+    <div class="row page_top">
+        <span class="title">Осьметодичка. Результаты поиска</span>
+        <span class="right_part">
+            <span id="username"></span><input type="button" class="btn btn-info cornerbtn" value="На главную"></span>
+        </span>
+    </div>
+    <div class="row main">
+        <div class="col-12" id='result'>
+
+        </div>
+    </div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+<script src="js/res.js"></script>
+<script>
+    function getUsername(){
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/getusername', true);
+
+        xhr.onload = function () {
+            let data = xhr.responseText;
+            document.getElementById("username").innerHTML = data;
+        }
+        xhr.send()
+    }
+    $( ".cornerbtn").click(function() {
+        window.location.href = `/menu`;
+    });
+    getUsername();
+</script>
+</body>
+</html>

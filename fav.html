@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <title>Menu</title>
+    <link rel="icon" href="style/img/icon.png">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/res.css">
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            position: absolute;
+            right: 45%;
+            top: 30%;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        </style>
+</head>
+<body>
+<div class="container-fluid body">
+    <div class="row page_top">
+        <span class="title">Осьметодичка. Моё избранное</span>
+        <span class="right_part">
+            <span id="username"></span><input type="button" class="btn btn-info cornerbtn" value="На главную"></span>
+        </span>
+    </div>
+    <div class="row main">
+        <div class="col-12" id='result'>
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+<script src="js/fav.js"></script>
+<script>
+    function getUsername(){
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/getusername', true);
+
+        xhr.onload = function () {
+            let data = xhr.responseText;
+            document.getElementById("username").innerHTML = data;
+        }
+        xhr.send()
+    }
+    $( ".cornerbtn").click(function() {
+        window.location.href = `/menu`;
+    });
+    getUsername();
+</script>
+</body>
+</html>

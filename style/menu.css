@@ -1,0 +1,18 @@
+.menu-main{
+    /*background: #b8e7ea url("img/cutie (4).png") no-repeat 50% 40%;*/
+    background: #ebf8f9 url("img/cutie (4).png") no-repeat 50% 40%;
+    height: 600px;
+}
+
+label{
+    font-size: 30px;
+    color: darkblue;
+}
+.opt{
+    text-align: center;
+    margin-top: 10%;
+}
+.image{
+    margin: 5%;
+    width: 70%;
+}

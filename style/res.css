@@ -1,0 +1,13 @@
+h3{
+    width: 100%;
+    background-color: #59c8cd;
+    color: white;
+    font-size: 25px;
+    padding: 10px;
+    padding-right: 400px;
+    border-radius: 2px;
+}
+
+block{
+    display: none;
+}
