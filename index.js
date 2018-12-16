@@ -1,4 +1,4 @@
-const express = require('express')
+﻿const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session);
@@ -8,18 +8,19 @@ app.use(bodyParser.json())
 app.use(express.static(__dirname))
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
-let port = 80
+let port = 0
 app.listen(port, () => {
 
     console.log(`Listening on port ${port}`)
 })
 
 const mongoClient = require("mongodb").MongoClient;
-const url = "mongodb://localhost:27017/";
+//const url = "mongodb://localhost:27017/";
+const url = "mongodb://user:user123@ds056549.mlab.com:56549/metodbase";
 
 app.use(session({
     secret: 'mylittlesecret',
-    store: new MongoStore({url: 'mongodb://localhost:27017/'}),
+    store: new MongoStore({url: "mongodb://user:user123@ds056549.mlab.com:56549/metodbase"}),
     cookie: {
         path: '/',
         httpOnly: true,
@@ -112,12 +113,7 @@ app.get('/regist', (req, res) => {
     res.sendFile(__dirname + '/regist.html')
 });
 app.get('/mero', (req, res) => {
-    mongoClient.connect(url, function (err, client) {
-        client.db("metodbase").collection("mero").findOne(({name: "Квадрат"}), function (error, result) {
-            console.log(JSON.stringify(result));
-        });
-    });
-                if (req.session.authorized) {
+    if (req.session.authorized) {
         res.sendFile(__dirname + '/mero.html')
     }
     else

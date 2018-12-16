@@ -64,23 +64,52 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="240972888">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.33" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="js" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JavaScript" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="js" value="77" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JavaScript" value="77" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/new.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1921">
-              <caret line="113" column="32" lean-forward="true" selection-start-line="113" selection-start-column="32" selection-end-line="113" selection-end-column="32" />
+            <state relative-caret-position="317">
+              <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/new.html">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+            <state relative-caret-position="130">
+              <caret line="116" column="46" selection-start-line="116" selection-start-column="46" selection-end-line="116" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -89,7 +118,7 @@
         <entry file="file://$PROJECT_DIR$/add.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1326">
-              <caret line="78" column="9" lean-forward="true" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
+              <caret line="78" column="9" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -107,7 +136,7 @@
         <entry file="file://$PROJECT_DIR$/js/mero.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="18" column="2" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+              <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -134,7 +163,7 @@
         <entry file="file://$PROJECT_DIR$/mero.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1258">
-              <caret line="74" column="4" lean-forward="true" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="40" />
+              <caret line="74" column="4" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -148,7 +177,7 @@
         <option value="$PROJECT_DIR$/games_page4.html" />
         <option value="$PROJECT_DIR$/mero_page3.html" />
         <option value="$PROJECT_DIR$/autho_page1.html" />
-        <option value="$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/criterion.html" />
+        <option value="$PROJECT_DIR$/../projects/portfolio/portfolio/frontend/build/criterion.html" />
         <option value="$PROJECT_DIR$/css/menu.css" />
         <option value="$PROJECT_DIR$/menu_page2.html" />
         <option value="$PROJECT_DIR$/link.js" />
@@ -188,6 +217,7 @@
         <option value="$PROJECT_DIR$/js/fav.js" />
         <option value="$PROJECT_DIR$/add.html" />
         <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/index.js" />
       </list>
     </option>
   </component>
@@ -216,28 +246,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="BIG-PROJECT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BIG-PROJECT" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BIG-PROJECT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BIG-PROJECT" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BIG-PROJECT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BIG-PROJECT" type="462c0819:PsiDirectoryNode" />
-              <item name="style" type="462c0819:PsiDirectoryNode" />
+              <item name="web-pro" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-pro" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -298,11 +318,12 @@
       <workItem from="1544203892651" duration="37271000" />
       <workItem from="1544446806211" duration="52952000" />
       <workItem from="1544879694856" duration="136000" />
+      <workItem from="1544974201764" duration="1048000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="165719000" />
+    <option name="totallyTimeSpent" value="166767000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -353,28 +374,28 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/css/autho_style.css" />
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/public/style/profile_admin_style.css">
+    <entry file="file://$PROJECT_DIR$/../projects/portfolio/portfolio/frontend/build/public/style/profile_admin_style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="53" column="16" lean-forward="true" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/criterion.html">
+    <entry file="file://$PROJECT_DIR$/../projects/portfolio/portfolio/frontend/build/criterion.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="369">
           <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/public/style/criterion.css">
+    <entry file="file://$PROJECT_DIR$/../projects/portfolio/portfolio/frontend/build/public/style/criterion.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="505">
           <caret line="61" column="2" selection-end-line="61" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/profile_admin.html">
+    <entry file="file://$PROJECT_DIR$/../projects/portfolio/portfolio/frontend/build/profile_admin.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="34" column="18" selection-start-line="23" selection-start-column="8" selection-end-line="34" selection-end-column="18" />
@@ -383,39 +404,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/menu.css" />
     <entry file="file://$PROJECT_DIR$/css/img/mero.css" />
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/processed.html">
+    <entry file="file://$PROJECT_DIR$/../projects/portfolio/portfolio/frontend/build/processed.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="355">
           <caret line="139" selection-start-line="139" selection-end-line="141" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/public/js/add.js">
+    <entry file="file://$PROJECT_DIR$/../projects/portfolio/portfolio/frontend/build/public/js/add.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="901">
           <caret line="53" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/add.html">
+    <entry file="file://$PROJECT_DIR$/../projects/portfolio/portfolio/frontend/build/add.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="41" column="25" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/public/js/processed.js">
+    <entry file="file://$PROJECT_DIR$/../projects/portfolio/portfolio/frontend/build/public/js/processed.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/js/app.js" />
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/app.js">
+    <entry file="file://$PROJECT_DIR$/../projects/portfolio/portfolio/frontend/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="505">
           <caret line="32" lean-forward="true" selection-end-line="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/projects/portfolio/portfolio/frontend/build/user_main.html">
+    <entry file="file://$PROJECT_DIR$/../projects/portfolio/portfolio/frontend/build/user_main.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/style/games.css">
@@ -541,16 +562,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/add.js" />
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1921">
-          <caret line="113" column="32" lean-forward="true" selection-start-line="113" selection-start-column="32" selection-end-line="113" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js" />
     <entry file="file://$PROJECT_DIR$/new.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
+        <state relative-caret-position="317">
           <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
         </state>
       </provider>
@@ -558,7 +573,7 @@
     <entry file="file://$PROJECT_DIR$/add.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1326">
-          <caret line="78" column="9" lean-forward="true" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
+          <caret line="78" column="9" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -572,7 +587,7 @@
     <entry file="file://$PROJECT_DIR$/js/mero.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="18" column="2" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+          <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -593,7 +608,14 @@
     <entry file="file://$PROJECT_DIR$/mero.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1258">
-          <caret line="74" column="4" lean-forward="true" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="40" />
+          <caret line="74" column="4" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="116" column="46" selection-start-line="116" selection-start-column="46" selection-end-line="116" selection-end-column="46" />
         </state>
       </provider>
     </entry>
