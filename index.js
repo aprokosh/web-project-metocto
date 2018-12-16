@@ -8,7 +8,7 @@ app.use(bodyParser.json())
 app.use(express.static(__dirname))
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
-let port = 8080
+var port = process.env.port || 3000;
 app.listen(port, () => {
 
     console.log(`Listening on port ${port}`)
