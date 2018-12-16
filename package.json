@@ -2,7 +2,7 @@
   "name": "big-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main":"autho.html",
   "scripts": {
     "prestart": "npm start",
     "start": "node index.js",
