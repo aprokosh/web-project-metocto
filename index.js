@@ -16,13 +16,6 @@ app.listen(port, () => {
 
 const mongoClient = require("mongodb").MongoClient;
 const url = "mongodb://localhost:27017/";
-//const url2 = 'mongodb://myuser:myuser123@ds056549.mlab.com:56549/';
-
-// var sessionStore = new MongoStore({
-//     host: 'ds056549.mlab.com',
-//     port: '56549',
-//     url: 'mongodb://myuser:myuser123@ds056549.mlab.com:56549/'
-// });
 
 app.use(session({
     secret: 'mylittlesecret',
@@ -119,7 +112,12 @@ app.get('/regist', (req, res) => {
     res.sendFile(__dirname + '/regist.html')
 });
 app.get('/mero', (req, res) => {
-    if (req.session.authorized) {
+    mongoClient.connect(url, function (err, client) {
+        client.db("metodbase").collection("mero").findOne(({name: "Квадрат"}), function (error, result) {
+            console.log(JSON.stringify(result));
+        });
+    });
+                if (req.session.authorized) {
         res.sendFile(__dirname + '/mero.html')
     }
     else
@@ -219,7 +217,6 @@ app.get("/getmero", (req, res) => {
             place: { $in: [ place_value, 'Любое'] },
             status: 'confirmed'
         }).toArray(function(err, results){
-            console.log(JSON.stringify(results))
             let meros = []
             for (let res of results) {
             if ((res.fav).includes(req.session.username))
@@ -227,6 +224,7 @@ app.get("/getmero", (req, res) => {
             else
                 meros.push({ id: res._id, name: res.name, type: res.type, age: res.age, hard: res.hard, place: res.place, desc: res.desc, link: res.link, f: false})
             }
+            console.log(JSON.stringify(meros));
             res.status(200).send({ data: meros })
         });
     });
