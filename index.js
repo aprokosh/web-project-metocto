@@ -18,11 +18,11 @@ app.listen(port, () => {
 
 const mongoClient = require("mongodb").MongoClient;
 //const url = "mongodb://localhost:27017/";
-const url = "mongodb://user:user123@ds056549.mlab.com:56549/metodbase";
+const url = process.env.MONGODB_URI || "mongodb://user:user123@ds056549.mlab.com:56549/metodbase";
 
 app.use(session({
     secret: 'mylittlesecret',
-    store: new MongoStore({url: "mongodb://user:user123@ds056549.mlab.com:56549/metodbase"}),
+    store: new MongoStore({url: process.env.MONGODB_URI || "mongodb://user:user123@ds056549.mlab.com:56549/metodbase"}),
     cookie: {
         path: '/',
         httpOnly: true,
