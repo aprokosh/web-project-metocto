@@ -30,5 +30,8 @@
     "passport-local": "^1.0.0",
     "req-flash": "0.0.3",
     "session-file-store": "^1.2.0"
+  },
+  "devDependencies": {
+    "dotenv": "^6.2.0"
   }
 }
