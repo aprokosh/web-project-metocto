@@ -143,7 +143,7 @@ app.get('/favorite', (req, res) => {
 });
 
 app.post("/add", urlencodedParser, function (req, res) {
-    let check = false;
+    let check = true;
     const regex1 = /([0-9\s\D]*)([a-zA-Zа-яА-Я]+)([0-9\s\D]*){3,}/g;
     const regex2 = /([a-zA-Z0-9/]+)([a-zA-Z0-9/:-]*)([.]+)([a-zA-Z]+)([a-zA-Z0-9/-]*){5,}/g;
     let ch1 = req.body.name.match(regex1);
