@@ -284,8 +284,10 @@ app.post('/unfav', (req, res) => {
 
 app.get('/getfav', (req, res) => {
     let meros = [];
+    console.log('meow at getting fav')
     mongoClient.connect(url, function (err, client) {
         client.db("metodbase").collection("users").findOne({login: req.session.username}, function (err, result) {
+            console.log(result.fav.length)
             for (var i = 0; i < result.fav.length; ++i) {
                 client.db("metodbase").collection("mero").findOne({_id: ObjectId(result.fav[i])}, function (err, res) {
                     meros.push({
