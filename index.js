@@ -93,7 +93,6 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    console.log('meow at /')
     res.sendFile(__dirname + '/autho.html')
 });
 app.get('/menu', (req, res) => {
@@ -215,6 +214,7 @@ app.get("/getmero", (req, res) => {
         }).toArray(function(err, results){
             let meros = []
             for (let res of results) {
+                console.log((res.fav).includes(req.session.username))
             if ((res.fav).includes(req.session.username))
                 meros.push({ id: res._id, name: res.name, type: res.type, age: res.age, hard: res.hard, place: res.place, desc: res.desc, link: res.link, f: true})
             else
@@ -266,7 +266,7 @@ app.post('/fav', (req, res) => {
     let id = req.body.id;
     mongoClient.connect(url, function (err, client) {
         client.db("metodbase").collection("users").findOneAndUpdate(
-            { "login" : req.session.username},{$addToSet: { fav: id}})
+            { "login" : req.session.username},{$addToSet: { fav: ObjectId(id)}})
         client.db("metodbase").collection("mero").findOneAndUpdate(
             { "_id" : ObjectId(id)},{$addToSet: { fav: req.session.username}})
     });
@@ -276,7 +276,7 @@ app.post('/unfav', (req, res) => {
     let id = req.body.id;
     mongoClient.connect(url, function (err, client) {
         client.db("metodbase").collection("users").findOneAndUpdate(
-            { "login" : req.session.username},{$pull: { fav: id}})
+            { "login" : req.session.username},{$pull: { fav: ObjectId(id)}})
         client.db("metodbase").collection("mero").findOneAndUpdate(
             { "_id" : ObjectId(id)},{$pull: { fav: req.session.username}})
     });
@@ -284,12 +284,10 @@ app.post('/unfav', (req, res) => {
 
 app.get('/getfav', (req, res) => {
     let meros = [];
-    mongoClient.connect(url, function (err, client) {
-        client.db("metodbase").collection("users").findOne({login: req.session.username}, function (err, result) {
+    mongoClient.connect(url, async function (err, client) {
+        client.db("metodbase").collection("users").findOne({login: req.session.username}, async function (err, result) {
             for (var i = 0; i < result.fav.length; ++i) {
-                console.log(result.fav[i]);
-                client.db("metodbase").collection("mero").findOne({_id: ObjectId(result.fav[i])}, function (err, res) {
-                    console.log(JSON.stringify(res));
+                await client.db("metodbase").collection("mero").findOne({"_id": ObjectId(result.fav[i])}).then((res) =>  {
                     meros.push({
                         id: res._id,
                         name: res.name,

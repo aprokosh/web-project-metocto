@@ -1,13 +1,13 @@
 function confirm (button) {
     let id = button.value;
     $.post('/confirm', { id: id });
-    document.getElementById(id).innerHTML = '<div>Принято</div>';
+    document.getElementById(id).innerHTML = '<img src="style/img/ok.png">';
 }
 
 function reject (button) {
     let id = button.value;
     $.post('/reject', { id: id });
-    document.getElementById(id).innerHTML = '<div>Отклонено</div>';
+    document.getElementById(id).innerHTML = '<img src="style/img/no.png">';
 }
 
 function getNew () {
