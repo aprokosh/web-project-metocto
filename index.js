@@ -11,7 +11,7 @@ var helmet = require('helmet');
 app.use(helmet())
 
 var port = process.env.port || 3000;
-app.listen(port, () => {
+app.listen(process.env.port ||port, () => {
 
     console.log(`Listening on port ${port}`)
 })
@@ -19,7 +19,7 @@ app.listen(port, () => {
 const mongoClient = require("mongodb").MongoClient;
 //const url = "mongodb://localhost:27017/";
 const url = process.env.MONGODB_URI || "mongodb://user:user123@ds056549.mlab.com:56549/metodbase";
-
+console.log('meow at db')
 app.use(session({
     secret: 'mylittlesecret',
     store: new MongoStore({url: process.env.MONGODB_URI || "mongodb://user:user123@ds056549.mlab.com:56549/metodbase"}),
@@ -32,9 +32,7 @@ app.use(session({
     saveUninitialized: false
 })
 );
-
-var flash = require('req-flash');
-app.use(flash());
+console.log('meow at session')
 
 app.post("/reg", urlencodedParser, function (req, res) {
     mongoClient.connect(url, function (err, client) {
