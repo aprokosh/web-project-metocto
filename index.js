@@ -9,6 +9,7 @@ app.use(express.static(__dirname))
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 var helmet = require('helmet');
 app.use(helmet())
+var Crypto = require('crypto-js')
 
 var port = process.env.PORT || 3000;
 app.listen(process.env.PORT ||port, () => {
@@ -34,31 +35,35 @@ app.use(session({
 );
 
 app.post("/reg", urlencodedParser, function (req, res) {
+    const regex = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,16}/;
+    let ch = req.body.password1.match(regex);
     mongoClient.connect(url, function (err, client) {
         client.db("metodbase").collection("users").findOne({login: req.body.name}, function(err,result){
             if (result) {
                 console.log("Имя пользователя уже используется")
                 res.redirect('/regist')
             }
+            else if (req.body.password1 != req.body.password2){
+                console.log("Введенные пароли не совпадают!")
+                res.redirect('/regist')
+            }
+            else if ((ch==null) || (ch[0] !== req.body.password1)) {
+                console.log("Слабый пароль")
+                res.redirect('/regist')
+            }
+            else {
+                client.db("metodbase").collection("users").insertOne({login: req.body.name, password: Crypto.SHA256(req.body.password1).toString(), role: 'user', fav: []});
+                res.sendFile(__dirname + '/autho.html')
+            }
         });
     });
-    if (req.body.password1 != req.body.password2){
-        console.log("Введенные пароли не совпадают!")
-        res.redirect('/regist')
-    }
-    else {
-        mongoClient.connect(url, function (err, client) {
-            client.db("metodbase").collection("users").insertOne({login: req.body.name, password: req.body.password1, role: 'user', fav: []});
-        });
-        res.sendFile(__dirname + '/autho.html')
-    }
 });
 
 app.post("/login", urlencodedParser, function (req, res) {
     mongoClient.connect(url, function (err, client) {
         client.db("metodbase").collection("users").findOne({login: req.body.login}, function(err,result){
             if (result) {
-                if (result.password === req.body.password) {
+                if (Crypto.SHA256(req.body.password).toString() === result.password) {
                     req.session.authorized = true;
                     req.session.username = req.body.login;
                     req.session.role = result.role;
@@ -138,10 +143,20 @@ app.get('/favorite', (req, res) => {
 });
 
 app.post("/add", urlencodedParser, function (req, res) {
-    res.redirect('/menu')
+    let check = false;
+    const regex1 = /([0-9\s\D]*)([a-zA-Zа-яА-Я]+)([0-9\s\D]*){3,}/g;
+    const regex2 = /([a-zA-Z0-9/]+)([a-zA-Z0-9/:-]*)([.]+)([a-zA-Z]+)([a-zA-Z0-9/-]*){5,}/g;
+    let ch1 = req.body.name.match(regex1);
+    let ch2 = req.body.desc.match(regex1);
+    let ch3 = req.body.link.match(regex2)
+    if ((ch1==null)||(ch2==null)||(ch3==null)||(ch1[0] != req.body.name) || (ch2[0] != req.body.desc) || (ch3[0] != req.body.link)) {
+        res.redirect('/add')
+        check = false;
+    }
+    else res.redirect('/menu')
     mongoClient.connect(url, function (err, client) {
         client.db("metodbase").collection("schema").findOne(function(error, result){
-            if ((result.age.includes(req.body.age)) && (result.type.includes(req.body.type)) && (result.hard.includes(req.body.hard)) && (result.place.includes(req.body.place))){
+            if ((check) && (result.age.includes(req.body.age)) && (result.type.includes(req.body.type)) && (result.hard.includes(req.body.hard)) && (result.place.includes(req.body.place))){
                 if (req.session.role === 'admin')
                     client.db("metodbase").collection("mero").insertOne({
                         name: req.body.name,
@@ -232,13 +247,13 @@ app.get('/getusername', (req, res) => {
 });
 
 app.get('/countnew', (req, res) => {
-    mongoClient.connect(url, function (err, client) {
-        client.db("metodbase").collection("mero").find({
-            status: 'review'
-        }).count(function(err, result){
-            res.send(result);
-        });
-    });
+            mongoClient.connect(url, function (err, client) {
+                client.db("metodbase").collection("mero").find({
+                    status: 'review'
+                }).count(function (err, result) {
+                    res.send(result);
+                });
+            });
 });
 
 ObjectId = require("mongodb").ObjectID;

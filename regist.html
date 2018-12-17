@@ -17,11 +17,11 @@
         <div class="col-2"></div>
         <div class="col-8 autho">
                     <span>
-                        <form action="/reg" method="post">
+                        <form action="/reg" method="post" id="form">
                             <label id='name'>Имя пользователя</label><br>
-                            <input type='text', name='name' class="form-control" required><br>
+                            <input type='text', name='name' class="form-control username" required><br>
                             <label id='password1'>Пароль</label><br>
-                            <input type='password', name='password1' class="form-control" required><br>
+                            <input type='password', name='password1' class="form-control userpass" required><br>
                             <label id='password2'>Повторите пароль</label><br>
                             <input type='password', name='password2' class="form-control" required><br>
                             <input type='submit', class='btn btn-info', value='Регистрация'>
@@ -36,6 +36,13 @@
 <script>
     $( ".cornerbtn").click(function() {
         window.location.href = `/login`;
+    });
+    document.getElementById('form').addEventListener('submit', function() {
+        var pass = document.getElementsByClassName('userpass');
+        const regex = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,16}/;
+        let ch = pass[0].value.match(regex);
+        if ((ch==null)||(ch[0] !== pass[0].value)) alert("Подберите пароль посложнее! Пароль должен содержать 6-16 символов, состоять из цифр и символов латинского алфавита. ");
+        else alert("Если введенные пароли совпадают и имя пользователя не занято, вы будете перенаправлены на страницу входа");
     });
 </script>
 </body>

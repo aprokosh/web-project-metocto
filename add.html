@@ -19,8 +19,8 @@
     <div class="row main">
         <div class="col-1"></div>
         <div class="col-9 choose">
-            <form action="/add" method="post">
-                <input type="text" class="form-control area_text" placeholder="Введите название" name = "name" required>
+            <form action="/add" method="post" id="form">
+                <input type="text" class="form-control area_text rus_text" placeholder="Введите название" name = "name" required>
                 <div>
                     <label  for="category" class="label_direction">Категория</label>
                     <br />
@@ -49,8 +49,8 @@
 
                     </select>
                 </div>
-                <br><input type="text" class="form-control area_text" placeholder="Введите описание" name = "desc" required>
-                <br><input type="text" class="form-control area_text" placeholder="Введите ссылку" name = "link" required>
+                <br><input type="text" class="form-control area_text rus_text" placeholder="Введите описание" name = "desc" required>
+                <br><input type="text" class="form-control area_text some_link" placeholder="Введите ссылку" name = "link" required>
                 <input class="button btn btn-info push" type="submit" value="Добавить">
             </form>
         </div>
@@ -69,13 +69,25 @@
         }
         xhr.send()
     }
-    $( ".push").click(function() {
-        alert("Мероприятие будет рассмотрено модератором");
-    });
     $( ".cornerbtn").click(function() {
         window.location.href = `/menu`;
     });
     getUsername();
+
+    document.getElementById('form').addEventListener('submit', function() {
+        var inputs = document.querySelectorAll('.rus_text'), result, i;
+        const regex1 = /([0-9\s\D]*)([a-zA-Zа-яА-Я]+)([0-9\s\D]*){3,}/g;
+        let ch1 = inputs[0].value.match(regex1);
+        let ch2 = inputs[1].value.match(regex1);
+        var link = document.getElementsByClassName('some_link');
+        const regex2 = /([a-zA-Z0-9/]+)([a-zA-Z0-9/:-]*)([.]+)([a-zA-Z]+)([a-zA-Z0-9/-]*){5,}/g;
+        let ch3 = link[0].value.match(regex2);
+        if ((ch1==null)||(ch1[0] !== inputs[0].value)) alert("Некорректное название");
+            else if ((ch2==null)||(ch2[0] !== inputs[1].value)) alert("Некорректное описание");
+                else if ((ch3==null)||(ch3[0] !== link[0].value)) alert("Некорректная ссылка");
+                    else alert("Мероприятие будет рассмотрено модератором");
+        });
+
 </script>
 <script src="js/search.js"></script>
 </body>
