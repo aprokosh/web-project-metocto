@@ -7,6 +7,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static(__dirname))
 const urlencodedParser = bodyParser.urlencoded({extended: false});
+var helmet = require('helmet');
+app.use(helmet())
 
 var port = process.env.port || 3000;
 app.listen(port, () => {
