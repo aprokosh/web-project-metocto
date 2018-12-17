@@ -19,7 +19,7 @@ app.listen(process.env.port ||port, () => {
 const mongoClient = require("mongodb").MongoClient;
 //const url = "mongodb://localhost:27017/";
 const url = process.env.MONGODB_URI || "mongodb://user:user123@ds056549.mlab.com:56549/metodbase";
-console.log('meow at db')
+
 app.use(session({
     secret: 'mylittlesecret',
     store: new MongoStore({url: process.env.MONGODB_URI || "mongodb://user:user123@ds056549.mlab.com:56549/metodbase"}),
@@ -32,7 +32,6 @@ app.use(session({
     saveUninitialized: false
 })
 );
-console.log('meow at session')
 
 app.post("/reg", urlencodedParser, function (req, res) {
     mongoClient.connect(url, function (err, client) {
@@ -94,6 +93,7 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/', (req, res) => {
+    console.log('meow at /')
     res.sendFile(__dirname + '/autho.html')
 });
 app.get('/menu', (req, res) => {
