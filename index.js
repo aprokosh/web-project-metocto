@@ -10,8 +10,8 @@ const urlencodedParser = bodyParser.urlencoded({extended: false});
 var helmet = require('helmet');
 app.use(helmet())
 
-var port = process.env.port || 3000;
-app.listen(process.env.port ||port, () => {
+var port = process.env.PORT || 3000;
+app.listen(process.env.PORT ||port, () => {
 
     console.log(`Listening on port ${port}`)
 })
