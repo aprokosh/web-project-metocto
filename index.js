@@ -286,7 +286,7 @@ app.get('/getfav', (req, res) => {
     let meros = [];
     mongoClient.connect(url, function (err, client) {
         client.db("metodbase").collection("users").findOne({login: req.session.username}, function (err, result) {
-            for (var i = 1; i <= result.fav.length; ++i) {
+            for (var i = 0; i < result.fav.length; ++i) {
                 console.log(result.fav[i]);
                 client.db("metodbase").collection("mero").findOne({_id: ObjectId(result.fav[i])}, function (err, res) {
                     console.log(JSON.stringify(res));
