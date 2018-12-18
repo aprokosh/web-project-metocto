@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "chai-integer": "^0.1.0",
     "compression": "^1.7.3",
     "connect": "^3.6.6",
     "connect-flash": "^0.1.1",

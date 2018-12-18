@@ -34,9 +34,15 @@ app.use(session({
 })
 );
 
+check_regex = function (regex, string){
+    let ch = string.match(regex);
+    if ((ch==null)||(ch[0]!==string)) return false;
+    else return true;
+}
+
 app.post("/reg", urlencodedParser, function (req, res) {
     const regex = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,16}/;
-    let ch = req.body.password1.match(regex);
+    let check = check_regex(regex, req.body.password1)
     mongoClient.connect(url, function (err, client) {
         client.db("metodbase").collection("users").findOne({login: req.body.name}, function(err,result){
             if (result) {
@@ -47,7 +53,7 @@ app.post("/reg", urlencodedParser, function (req, res) {
                 console.log("Введенные пароли не совпадают!")
                 res.redirect('/regist')
             }
-            else if ((ch==null) || (ch[0] !== req.body.password1)) {
+            else if (!check) {
                 console.log("Слабый пароль")
                 res.redirect('/regist')
             }
@@ -141,15 +147,46 @@ app.get('/favorite', (req, res) => {
     else
         res.redirect('/404')
 });
+//some functions
+count_new = function(){
+    return new Promise(function (resolve, reject) {
+        mongoClient.connect(url, function (err, client) {
+            client.db("metodbase").collection("mero").find({
+                status: 'review'
+            }).count(function (err, result) {
+                resolve(result);
+            });
+        });
+    });
+}
+
+is_fav = function(username, mero){
+    if ((mero.fav).includes(username)) return true;
+        else return false;
+}
+find_mero_by_id = function(id) {
+    return new Promise(function (resolve, reject) {
+        mongoClient.connect(url, async function (err, client) {
+            await client.db("metodbase").collection("mero").findOne({"_id": ObjectId(id)}).then((res) => {
+                resolve(res);
+            });
+        });
+    });
+}
+
+module.exports = {
+    count_new, is_fav, find_mero_by_id, check_regex
+}
 
 app.post("/add", urlencodedParser, function (req, res) {
     let check = true;
     const regex1 = /([0-9\s\D]*)([a-zA-Zа-яА-Я]+)([0-9\s\D]*){3,}/g;
     const regex2 = /([a-zA-Z0-9/]+)([a-zA-Z0-9/:-]*)([.]+)([a-zA-Z]+)([a-zA-Z0-9/-]*){5,}/g;
-    let ch1 = req.body.name.match(regex1);
-    let ch2 = req.body.desc.match(regex1);
-    let ch3 = req.body.link.match(regex2)
-    if ((ch1==null)||(ch2==null)||(ch3==null)||(ch1[0] != req.body.name) || (ch2[0] != req.body.desc) || (ch3[0] != req.body.link)) {
+    let check1 = check_regex(regex1, req.body.name)
+    let check2 = check_regex(regex1, req.body.desc)
+    let check3 = check_regex(regex2, req.body.link)
+
+    if ((!check1)||(!check2)||(!check3)) {
         res.redirect('/add')
         check = false;
     }
@@ -229,8 +266,8 @@ app.get("/getmero", (req, res) => {
         }).toArray(function(err, results){
             let meros = []
             for (let res of results) {
-                console.log((res.fav).includes(req.session.username))
-            if ((res.fav).includes(req.session.username))
+                console.log(is_fav(req.session.username,res))
+            if (is_fav(req.session.username,res))
                 meros.push({ id: res._id, name: res.name, type: res.type, age: res.age, hard: res.hard, place: res.place, desc: res.desc, link: res.link, f: true})
             else
                 meros.push({ id: res._id, name: res.name, type: res.type, age: res.age, hard: res.hard, place: res.place, desc: res.desc, link: res.link, f: false})
@@ -247,13 +284,9 @@ app.get('/getusername', (req, res) => {
 });
 
 app.get('/countnew', (req, res) => {
-            mongoClient.connect(url, function (err, client) {
-                client.db("metodbase").collection("mero").find({
-                    status: 'review'
-                }).count(function (err, result) {
-                    res.send(result);
-                });
-            });
+    count_new().then(function(cnt){
+        res.send(cnt);
+    })
 });
 
 ObjectId = require("mongodb").ObjectID;
@@ -302,7 +335,7 @@ app.get('/getfav', (req, res) => {
     mongoClient.connect(url, async function (err, client) {
         client.db("metodbase").collection("users").findOne({login: req.session.username}, async function (err, result) {
             for (var i = 0; i < result.fav.length; ++i) {
-                await client.db("metodbase").collection("mero").findOne({"_id": ObjectId(result.fav[i])}).then((res) =>  {
+                find_mero_by_id(result.fav[i]).then(function(res) {
                     meros.push({
                         id: res._id,
                         name: res.name,

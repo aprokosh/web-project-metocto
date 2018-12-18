@@ -19,7 +19,7 @@ function getRes () {
     xhr.onload = function () {
         let mero = JSON.parse(xhr.responseText);
         let qq = '';
-        if (mero.data.length == 0){
+        if (mero.data.length === 0){
             qq += '<div><h1> Мероприятия с заданными параметрами не найдены</h1>';
             qq += '<input type="button" class="btn btn-info change" value="Изменить параметры"></div>';;
         }
