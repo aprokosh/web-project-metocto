@@ -1,4 +1,5 @@
 const index = require('../')
+//const client = require('../js/new.js')
 const chai = require('chai')
 const expect = chai.expect;
 chai.use( require('chai-integer') );

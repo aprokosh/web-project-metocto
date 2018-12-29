@@ -147,6 +147,9 @@ app.get('/favorite', (req, res) => {
     else
         res.redirect('/404')
 });
+app.get('/getrole', (req, res) => {
+        res.send(req.session.role);
+});
 //some functions
 count_new = function(){
     return new Promise(function (resolve, reject) {

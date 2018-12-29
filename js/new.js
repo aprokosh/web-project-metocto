@@ -6,8 +6,11 @@ function confirm (button) {
 
 function reject (button) {
     let id = button.value;
+    let id1 = "info";
+    id1 += id;
     $.post('/reject', { id: id });
     document.getElementById(id).innerHTML = '<img src="style/img/no.png">';
+    document.getElementById(id1).innerHTML = 'Мероприятие удалено из базы';
 }
 
 function getNew () {
@@ -25,6 +28,7 @@ function getNew () {
             qq += '<div class="mero">';
             qq += '<h3>' + mero.data[i].name + '<span id="' + this_id + '"><span></h3>';
             qq += '<block>';
+            qq += '<span id="info' + this_id + '">';
             qq += '<div> Возраст: ' + mero.data[i].age + '</div>';
             qq += '<div> Категория: ' + mero.data[i].type + '</div>';
             qq += '<div> Сложность: ' + mero.data[i].hard + '</div>';
@@ -33,7 +37,7 @@ function getNew () {
             qq += '<div><a href=' + mero.data[i].link + '>Ссылка</a></div>';
             qq += '<button type="button" onclick="confirm(this)" value="' + this_id + '" class="btn btn-outline-success">Принять</button>';
             qq += '<button type="button" onclick="reject(this)" value="' + this_id + '" class="btn btn-outline-danger">Отклонить</button>';
-            qq += '</block></div>';
+            qq += '</span></block></div>';
         }
         document.getElementById('result').innerHTML = qq;
         $('.mero h3').click(function () {

@@ -85,7 +85,17 @@
         if ((ch1==null)||(ch1[0] !== inputs[0].value)) alert("Некорректное название");
             else if ((ch2==null)||(ch2[0] !== inputs[1].value)) alert("Некорректное описание");
                 else if ((ch3==null)||(ch3[0] !== link[0].value)) alert("Некорректная ссылка");
-                    else alert("Мероприятие будет рассмотрено модератором");
+                    else {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '/getrole', true);
+
+                        xhr.onload = function () {
+                            let data = xhr.responseText;
+                            if (data === 'admin') alert ("Мероприятие принято");
+                            else alert("Мероприятие будет рассмотрено модератором");
+                        }
+                        xhr.send()
+                    }
         });
 
 </script>
