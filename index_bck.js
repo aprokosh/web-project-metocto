@@ -1,8 +1,7 @@
-const express = require('express')
+﻿const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
-const MongoStore = require('connect-mongo');
-
+const MongoStore = require('connect-mongo')(session);
 const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -12,7 +11,6 @@ var helmet = require('helmet');
 app.use(helmet())
 var Crypto = require('crypto-js');
 const { connect } = require('http2');
-
 
 app.use(session({
     name: 'example.sid',
@@ -34,31 +32,19 @@ app.listen(process.env.PORT ||port, () => {
 })
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const e = require('connect-flash');
 
 //const mongoClient = require("mongodb").MongoClient;
 //const url = "mongodb://localhost:27017/metodbase";
 //const url = process.env.MONGODB_URI || "mongodb://user:user123@ds056549.mlab.com:56549/metodbase";
-const url = "mongodb+srv://user:user123@cluster0.62mkasm.mongodb.net/metodbase";
+//const url = process.env.MONGODB_URI || "mongodb+srv://user:user123@cluster0.jxqq1oj.mongodb.net/metodbase";
 
 const mongoClient = new MongoClient(url, {
     serverApi: {
-      version: "1",
+      version: ServerApiVersion,
       strict: true,
       deprecationErrors: true,
     }
   });
-
-async function run() {
-    try {
-      await mongoClient.connect(url);
-      await mongoClient.db().command({ping:1});
-      console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    } finally {
-      // Ensures that the client will close when you finish/error
-    }
-  }
-  run().catch(console.dir);
 
 check_regex = function (regex, string){
     let ch = string.match(regex);
@@ -66,12 +52,11 @@ check_regex = function (regex, string){
     else return true;
 }
 
-app.post("/reg", urlencodedParser, async function (req, res) {
+app.post("/reg", urlencodedParser, function (req, res) {
     const regex = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,16}/;
     let check = check_regex(regex, req.body.password1)
-    try {
-        await mongoClient.connect(url);
-        await mongoClient.db().collection("users").findOne({name:"12"}).then(async (result)=>{
+    mongoClient.connect(url, function (err, client) {
+        client.db("metodbase").collection("users").findOne({login: req.body.name}, function(err,result){
             if (result) {
                 console.log("Имя пользователя уже используется")
                 res.redirect('/regist')
@@ -85,19 +70,17 @@ app.post("/reg", urlencodedParser, async function (req, res) {
                 res.redirect('/regist')
             }
             else {
-                await mongoClient.db("metodbase").collection("users").insertOne({login: req.body.name, password: Crypto.SHA256(req.body.password1).toString(), role: 'user', fav: []});
+                client.db("metodbase").collection("users").insertOne({login: req.body.name, password: Crypto.SHA256(req.body.password1).toString(), role: 'user', fav: []});
                 res.sendFile(__dirname + '/autho.html')
             }
         });
-    } catch (error) {
-    console.log("Error! ", error);
-  }
+    });
 });
 
-app.post("/login", urlencodedParser, async function(req,res){
-    try {
-        await mongoClient.connect(url);
-        await mongoClient.db().collection("users").findOne({login: req.body.login}).then((result)=>{
+app.post("/login", urlencodedParser, function (req, res) {
+    console.log(mongoClient.connect);
+    mongoClient.connect(url, function (err, client) {
+        client.db("metodbase").collection("users").findOne({login: req.body.login}, function(err,result){
             if (result) {
                 if (Crypto.SHA256(req.body.password).toString() === result.password) {
                     req.session.authorized = true;
@@ -115,11 +98,8 @@ app.post("/login", urlencodedParser, async function(req,res){
                 res.redirect('/')
             }
         });
-    } catch (error) {
-        console.log("Error! ", error);
-      }
-})
-
+    });
+});
 
 app.get('/new', (req, res) => {
     if (req.session.authorized && req.session.role === 'admin') {
@@ -140,6 +120,7 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/autho.html')
 });
 app.get('/menu', (req, res) => {
+    console.log(req.session.authorized);
     if (req.session.authorized) {
         if (req.session.role === 'admin')
             res.sendFile(__dirname + '/menu_admin.html')
@@ -184,41 +165,37 @@ app.get('/getrole', (req, res) => {
         res.send(req.session.role);
 });
 //some functions
-count_new = async function(resolve){
-    try {
-        await mongoClient.connect(url);
-        await mongoClient.db("metodbase").collection("mero").countDocuments({
-            status: 'review'
-        }).then((result)=> {
-            resolve(result);
+count_new = function(){
+    return new Promise(function (resolve, reject) {
+        mongoClient.connect(url, function (err, client) {
+            client.db("metodbase").collection("mero").find({
+                status: 'review'
+            }).count(function (err, result) {
+                resolve(result);
+            });
         });
-
-    } catch (error) {
-        console.log("Error! ", error);
-    }
+    });
 }
 
 is_fav = function(username, mero){
     if ((mero.fav).includes(username)) return true;
         else return false;
 }
-find_mero_by_id = async function(id, resolve) {
-    try {
-        await mongoClient.connect(url);
-        await mongoClient.db("metodbase").collection("mero").findOne({"_id": new ObjectId(id)}).then((res) => {
-            resolve(res);
+find_mero_by_id = function(id) {
+    return new Promise(function (resolve, reject) {
+        mongoClient.connect(url, async function (err, client) {
+            await client.db("metodbase").collection("mero").findOne({"_id": ObjectId(id)}).then((res) => {
+                resolve(res);
+            });
         });
-
-    } catch (error) {
-        console.log("Error! ", error);
-    }
+    });
 }
 
 module.exports = {
     count_new, is_fav, find_mero_by_id, check_regex
 }
 
-app.post("/add", urlencodedParser, async function (req, res) {
+app.post("/add", urlencodedParser, function (req, res) {
     let check = true;
     const regex1 = /([0-9\s\D]*)([a-zA-Zа-яА-Я]+)([0-9\s\D]*){3,}/g;
     const regex2 = /([a-zA-Z0-9/]+)([a-zA-Z0-9/:-]*)([.]+)([a-zA-Z]+)([a-zA-Z0-9/-]*){5,}/g;
@@ -231,12 +208,11 @@ app.post("/add", urlencodedParser, async function (req, res) {
         check = false;
     }
     else res.redirect('/menu')
-    try {
-        await mongoClient.connect(url);
-        await mongoClient.db().collection("schema").findOne().then(async (result) =>{
+    mongoClient.connect(url, function (err, client) {
+        client.db("metodbase").collection("schema").findOne(function(error, result){
             if ((check) && (result.age.includes(req.body.age)) && (result.type.includes(req.body.type)) && (result.hard.includes(req.body.hard)) && (result.place.includes(req.body.place))){
                 if (req.session.role === 'admin')
-                    await mongoClient.db("metodbase").collection("mero").insertOne({
+                    client.db("metodbase").collection("mero").insertOne({
                         name: req.body.name,
                         type: req.body.type,
                         age: req.body.age,
@@ -249,7 +225,7 @@ app.post("/add", urlencodedParser, async function (req, res) {
                         fav: []
                     });
                 else
-                    await mongoClient.db("metodbase").collection("mero").insertOne({
+                    client.db("metodbase").collection("mero").insertOne({
                         name: req.body.name,
                         type: req.body.type,
                         age: req.body.age,
@@ -263,26 +239,20 @@ app.post("/add", urlencodedParser, async function (req, res) {
                     });
             }
         });
-    } catch (error) {
-        console.log("Error! ", error);
-    }
-    
+    });
 });
 
-app.get('/getnew', async (req, res) => {
-    try {
-        await mongoClient.connect(url);
-        await mongoClient.db().collection("mero").find({status: 'review'
-        }).toArray().then((results) => {
+app.get('/getnew', (req, res) => {
+    mongoClient.connect(url, function (err, client) {
+        client.db("metodbase").collection("mero").find({status: 'review'
+        }).toArray(function(err, results){
             let meros = []
             for (let res of results) {
                 meros.push({ id: res._id, name: res.name, type: res.type, age: res.age, hard: res.hard, place: res.place, desc: res.desc, link: res.link })
             }
             res.status(200).send({ data: meros })
         });
-    } catch(error) {
-        console.log("Error! ", error);
-    }
+    });
 })
 
 var cat_value;
@@ -302,16 +272,15 @@ app.post("/getres", urlencodedParser, function (req, res) {
         res.redirect('/404')
 });
 
-app.get("/getmero", async (req, res) => {
-    try {
-        await mongoClient.connect(url);
-        await mongoClient.db().collection("mero").find({
+app.get("/getmero", (req, res) => {
+    mongoClient.connect(url, function (err, client) {
+        client.db("metodbase").collection("mero").find({
             type: cat_value,
             age: { $in: [ age_value, 'Любой'] },
             hard: { $in: [ hard_value] },
             place: { $in: [ place_value, 'Любое'] },
             status: 'confirmed'
-        }).toArray().then((results) => {
+        }).toArray(function(err, results){
             let meros = []
             for (let res of results) {
                 console.log(is_fav(req.session.username,res))
@@ -323,9 +292,7 @@ app.get("/getmero", async (req, res) => {
             console.log(JSON.stringify(meros));
             res.status(200).send({ data: meros })
         });
-    } catch (error) {
-        console.log("Error! ", error);
-    }
+    });
 });
 
 
@@ -334,73 +301,58 @@ app.get('/getusername', (req, res) => {
 });
 
 app.get('/countnew', (req, res) => {
-    count_new(async (cnt) => {
-        res.send(String(cnt));
+    count_new().then(function(cnt){
+        res.send(cnt);
     })
 });
 
-const {ObjectId} = require("mongodb");
+ObjectId = require("mongodb").ObjectID;
 
-app.post('/confirm', async (req, res) => {
+app.post('/confirm', (req, res) => {
     let id = req.body.id;
-    try {
-        await mongoClient.connect(url);
-        await mongoClient.db().collection("mero").findOneAndUpdate(
-            { "_id" : new ObjectId(id) },{$set: { status: "confirmed"}});
-        await mongoClient.db().collection("mero").findOne({"_id" : new ObjectId(id)}).then(async (result) => {
-            await mongoClient.db().collection("schema").findOneAndUpdate({},
+    mongoClient.connect(url, function (err, client) {
+        client.db("metodbase").collection("mero").findOneAndUpdate(
+            { "_id" : ObjectId(id) },{$set: { status: "confirmed"}});
+        client.db("metodbase").collection("mero").findOne({"_id" : ObjectId(id)}, function (error, result) {
+            client.db("metodbase").collection("schema").findOneAndUpdate({},
                 {$addToSet: {age: result.age, type: result.type, hard: result.hard, place: result.place}})
         });
-    } catch (error) {
-        console.log("Error! ", error)
-    }
+    });
 });
 
-app.post('/reject', async (req, res) => {
+app.post('/reject', (req, res) => {
     let id = req.body.id;
-    try {
-        await mongoClient.connect(url);
-        await mongoClient.db().collection("mero").deleteOne({"_id": new ObjectId(id)})
-    } catch (error) {
-        console.log("Error! ", error);
-    }
+    mongoClient.connect(url, function (err, client) {
+        client.db("metodbase").collection("mero").deleteOne({"_id": ObjectId(id)})
+    });
 });
 
-app.post('/fav', async (req, res) => {
+app.post('/fav', (req, res) => {
     let id = req.body.id;
-    console.log(id);
-    try {
-        await mongoClient.connect(url);
-        await mongoClient.db().collection("users").findOneAndUpdate(
-            { "login" : req.session.username},{$addToSet: { fav: new ObjectId(id)}})
-        await mongoClient.db().collection("mero").findOneAndUpdate(
-            { "_id" : new ObjectId(id)},{$addToSet: { fav: req.session.username}})
-    } catch (error) {
-        console.log("Error! ", error);
-    }
+    mongoClient.connect(url, function (err, client) {
+        client.db("metodbase").collection("users").findOneAndUpdate(
+            { "login" : req.session.username},{$addToSet: { fav: ObjectId(id)}})
+        client.db("metodbase").collection("mero").findOneAndUpdate(
+            { "_id" : ObjectId(id)},{$addToSet: { fav: req.session.username}})
+    });
 });
 
-app.post('/unfav', async (req, res) => {
+app.post('/unfav', (req, res) => {
     let id = req.body.id;
-    try {
-        await mongoClient.connect(url);
-        await mongoClient.db().collection("users").findOneAndUpdate(
-            { "login" : req.session.username},{$pull: { fav: new ObjectId(id)}})
-        await mongoClient.db().collection("mero").findOneAndUpdate(
-            { "_id" : new ObjectId(id)},{$pull: { fav: req.session.username}})
-    } catch (error) {
-        console.log("Error! ", error)
-    }
+    mongoClient.connect(url, function (err, client) {
+        client.db("metodbase").collection("users").findOneAndUpdate(
+            { "login" : req.session.username},{$pull: { fav: ObjectId(id)}})
+        client.db("metodbase").collection("mero").findOneAndUpdate(
+            { "_id" : ObjectId(id)},{$pull: { fav: req.session.username}})
+    });
 });
 
-app.get('/getfav', async (req, res) => {
+app.get('/getfav', (req, res) => {
     let meros = [];
-    try {
-        await mongoClient.connect(url);
-        await mongoClient.db().collection("users").findOne({login: req.session.username}).then((result) => {
-            console.log(result);
+    mongoClient.connect(url, async function (err, client) {
+        client.db("metodbase").collection("users").findOne({login: req.session.username}, async function (err, result) {
             for (var i = 0; i < result.fav.length; ++i) {
-                find_mero_by_id(result.fav[i], async (res) => {
+                find_mero_by_id(result.fav[i]).then(function(res) {
                     meros.push({
                         id: res._id,
                         name: res.name,
@@ -418,18 +370,13 @@ app.get('/getfav', async (req, res) => {
                 res.status(200).send({data: meros})
             }, 3000);
         });
-    } catch (error) {
-        console.log("Error! ", error);
-    }
+    });
 });
 
-app.get('/geteverything', async (req, res) => {
-    try {
-        await mongoClient.connect(url);
-        await mongoClient.db().collection("schema").findOne().then((result) => {
+app.get('/geteverything', (req, res) => {
+    mongoClient.connect(url, function (err, client) {
+        client.db("metodbase").collection("schema").findOne(function(err, result){
             res.send({age: result.age, type: result.type, hard: result.hard, place: result.place});
         });
-    } catch (error) {
-        console.log("Error! ", error);
-    }
+    });
 });
