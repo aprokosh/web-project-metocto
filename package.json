@@ -1,7 +1,9 @@
 {
   "name": "big-project",
   "version": "1.0.0",
-  "engines": { "node": "v20.7.0" },
+  "engines": {
+    "node": "18.x"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -28,7 +30,7 @@
     "mongodb": "6.3",
     "mongodb-core": "^3.2.7",
     "mongoose": "^5.3.13",
-    "node": "^10.14.2",
+    "node": "^21.2.0",
     "passport": "^0.4.0",
     "passport-auth0": "^1.1.0",
     "passport-local": "^1.0.0",
